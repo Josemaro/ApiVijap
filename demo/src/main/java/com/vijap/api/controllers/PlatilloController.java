@@ -6,9 +6,9 @@ import com.vijap.api.models.PlatilloModel;
 
 //import javax.persistence.Access;
 
-import com.vijap.api.models.UsuarioModel;
+
 import com.vijap.api.services.PlatilloService;
-import com.vijap.api.services.UsuarioService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
