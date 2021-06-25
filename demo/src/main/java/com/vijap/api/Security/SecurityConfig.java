@@ -1,5 +1,7 @@
 package com.vijap.api.Security;
 
+import com.vijap.api.Security.jwt.JwtEntryPoint;
+import com.vijap.api.Security.jwt.JwtFilter;
 import com.vijap.api.services.UserDetailsServiceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImp userDetailsService;
-    // @Autowired
-    // private JwtEntryPoint jwtEntryPoint;
+    @Autowired
+    private JwtEntryPoint jwtEntryPoint;
 
-    // @Bean
-    // public JwtFilter jwtFilter() {
-    //     return new JwtFilter();
-    // }
+    @Bean
+    public JwtFilter jwtFilter() {
+        return new JwtFilter();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -72,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/usuario/**").permitAll()
                 .antMatchers("/platillo/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers(
                         "/auth/**",
                         "/v2/api-docs/**",
@@ -80,9 +83,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/configuration/**"
                 ).permitAll()
                 .and()
-                // .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-                // .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        // http.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
