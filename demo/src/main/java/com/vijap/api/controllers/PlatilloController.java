@@ -1,11 +1,13 @@
 package com.vijap.api.controllers;
-
 import java.util.ArrayList;
 import java.util.Optional;
+
+import com.vijap.api.models.PlatilloModel;
 
 //import javax.persistence.Access;
 
 import com.vijap.api.models.UsuarioModel;
+import com.vijap.api.services.PlatilloService;
 import com.vijap.api.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,41 +21,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-@CrossOrigin(origins = "http://localhost:19654/")
+@CrossOrigin(origins = "http://localhost:1579/")
 @RestController
-@RequestMapping("/usuario")
-public class UsuarioController {
+@RequestMapping("/platillo")
+public class PlatilloController {
     @Autowired
-    UsuarioService usuarioService;
+    PlatilloService platilloService;
 
     
     @GetMapping("/listar")
-    public ArrayList<UsuarioModel> obtenerUsuarios(){
-        return usuarioService.obtenerUsuarios();
+    public ArrayList<PlatilloModel> obtenerPlatillos(){
+        return platilloService.obtenerPlatillos();
     }
-
 
     @PostMapping("/guardar")
-    public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
-        return this.usuarioService.guardarUsuario(usuario);
+    public PlatilloModel guardarPlatillo(@RequestBody PlatilloModel platillo){
+        return this.platilloService.guardarPlatillo(platillo);
     }
 
-    
-    @GetMapping(path ="/getId/{id}")
-    public Optional <UsuarioModel> obtenerUsuarioPorId(@PathVariable("id")Long id){
-        return this.usuarioService.obtenerPorId(id);
+    @GetMapping(path ="/getById/{id}")
+    public Optional<PlatilloModel> obtenerPlatilloPorId(@PathVariable("id")Long id){
+        return this.platilloService.obtenerPorId(id);
     }
-
-    @GetMapping(path ="/getCorreo/{email}")
-    public Optional <UsuarioModel> obtenerUsuarioPorEmail(@PathVariable("email")String email){
-        return this.usuarioService.obtenerPorEmail(email);
-    }
-
 
     @DeleteMapping(path = "/eliminar/{id}")
     public String eliminarPorId(@PathVariable("id")Long id){
-        boolean ok = this.usuarioService.eliminarUsuario(id);
+        boolean ok = this.platilloService.eliminarPlatillo(id);
         if(ok){
             return "Se eliminó el usuario con id" + id;
         }else{
@@ -61,9 +54,5 @@ public class UsuarioController {
         }
     }
 
-
-
-
-    
 
 }

@@ -20,7 +20,7 @@ public class UsuarioModel {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private Date fecha_nac;
+    //private Date fecha_nac;
     
     public long getId() {
         return id;
@@ -52,13 +52,15 @@ public class UsuarioModel {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    /*
     public Date getFecha_nac() {
         return fecha_nac;
     }
     public void setFecha_nac(Date fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
-    
+    */
 
 
     
