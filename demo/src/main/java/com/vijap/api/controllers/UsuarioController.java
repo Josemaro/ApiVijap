@@ -3,12 +3,16 @@ package com.vijap.api.controllers;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import com.vijap.api.dto.Message;
+
 //import javax.persistence.Access;
 
 import com.vijap.api.models.UsuarioModel;
 import com.vijap.api.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +39,14 @@ public class UsuarioController {
 
 
     @PostMapping("/guardar")
-    public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
-        return this.usuarioService.guardarUsuario(usuario);
+    public ResponseEntity<?> guardarUsuario(@RequestBody UsuarioModel usuario){
+        if(usuarioService.existsByEmail(usuario.getEmail())){
+            return new ResponseEntity(new Message("Correo ya existente"), HttpStatus.BAD_REQUEST);
+        }
+        this.usuarioService.guardarUsuario(usuario);
+        return new ResponseEntity(new Message("Usuario Insertado"), HttpStatus.OK);
     }
 
-    
     @GetMapping(path ="/getId/{id}")
     public Optional <UsuarioModel> obtenerUsuarioPorId(@PathVariable("id")Long id){
         return this.usuarioService.obtenerPorId(id);
