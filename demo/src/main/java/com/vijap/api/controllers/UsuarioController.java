@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@CrossOrigin(origins = "http://localhost:15638/")
+@CrossOrigin(origins = "http://localhost:1319/")
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -33,7 +33,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     //Decorador para autorizar solo usuario logeados
-    //@PreAuthorize("hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/listar")
     public ArrayList<UsuarioModel> obtenerUsuarios(){
         return usuarioService.obtenerUsuarios();

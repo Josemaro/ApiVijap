@@ -19,6 +19,7 @@ public class CustomUserDetails implements org.springframework.security.core.user
         return Collections.singleton(new SimpleGrantedAuthority("USER"));
     }
 
+    
     @Override
     public String getPassword() {
         return user.getPassword();

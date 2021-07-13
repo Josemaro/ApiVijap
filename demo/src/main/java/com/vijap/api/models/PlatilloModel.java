@@ -1,7 +1,7 @@
 package com.vijap.api.models;
 
 import javax.persistence.*;
-import javax.websocket.Decoder.Text;
+
 
 
 @Entity

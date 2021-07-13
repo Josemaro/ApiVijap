@@ -1,10 +1,8 @@
 package com.vijap.api.models;
 
-import java.util.Date;
+
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "usuario")
@@ -18,22 +16,22 @@ public class UsuarioModel {
     private String nombres;
     private String apellido_paterno;
     private String apellido_materno;
-    
+
     @Column(unique = true, nullable = false)
     private String email;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private String password;
 
     //private Date fecha_nac;
     
-    public long getId() {
-        return id;
-    }
     public String getPassword() {
         return password;
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public long getId() {
+        return id;
     }
     public void setId(long id) {
         this.id = id;

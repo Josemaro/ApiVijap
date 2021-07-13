@@ -40,9 +40,11 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
+    @CrossOrigin(origins = "http://localhost:1319/")
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@RequestBody LoginUserDto loginUserDto, BindingResult bindingResult) {
 //        loginUserDto to error
+        System.out.println("LOGINNNNN "+loginUserDto.getEmail()+"\n"+loginUserDto.getPassword());
         if (bindingResult.hasErrors()) {
             return new ResponseEntity(new Message("campos mal puestos"), HttpStatus.BAD_REQUEST);
         }
